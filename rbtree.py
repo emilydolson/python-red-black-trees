@@ -27,7 +27,7 @@ class RedBlackTree():
     # Preorder
     def pre_order_helper(self, node):
         if node != self.TNULL:
-            sys.stdout.write(node.item + " ")
+            sys.stdout.write(str(node.item) + " ")
             self.pre_order_helper(node.left)
             self.pre_order_helper(node.right)
 
@@ -35,7 +35,7 @@ class RedBlackTree():
     def in_order_helper(self, node):
         if node != self.TNULL:
             self.in_order_helper(node.left)
-            sys.stdout.write(node.item + " ")
+            sys.stdout.write(str(node.item) + " ")
             self.in_order_helper(node.right)
 
     # Postorder
@@ -43,7 +43,7 @@ class RedBlackTree():
         if node != self.TNULL:
             self.post_order_helper(node.left)
             self.post_order_helper(node.right)
-            sys.stdout.write(node.item + " ")
+            sys.stdout.write(str(node.item) + " ")
 
     # Search the tree
     def search_tree_helper(self, node, key):
@@ -323,6 +323,8 @@ class RedBlackTree():
             y.left = node
         else:
             y.right = node
+        
+        self.size += 1
 
         if node.parent is None:
             node.color = 0
@@ -332,7 +334,6 @@ class RedBlackTree():
             return
 
         self.fix_insert(node)
-        self.size += 1
 
     def get_root(self):
         return self.root
@@ -350,21 +351,21 @@ class RedBlackTree():
         self.searchTree(key).value = value
 
 
-if __name__ == "__main__":
-    bst = RedBlackTree()
+# if __name__ == "__main__":
+#     bst = RedBlackTree()
 
-    bst.insert(55)
-    bst.insert(40)
-    bst.insert(65)
-    bst.insert(60)
-    bst.insert(75)
-    bst.insert(57)
+#     bst.insert(55)
+#     bst.insert(40)
+#     bst.insert(65)
+#     bst.insert(60)
+#     bst.insert(75)
+#     bst.insert(57)
 
-    bst[67] = 8
-    print(bst[67])
+#     bst[67] = 8
+#     print(bst[67])
 
-    bst.print_tree()
+#     bst.print_tree()
 
-    print("\nAfter deleting an element")
-    bst.delete_node(40)
-    bst.print_tree()
+#     print("\nAfter deleting an element")
+#     bst.delete_node(40)
+#     bst.print_tree()

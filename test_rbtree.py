@@ -22,6 +22,36 @@ def test_delete():
     bst.delete_node(78)
     assert bst.searchTree(78) == bst.TNULL
 
+    bst.insert(73)
+    bst.insert(48)
+    bst.insert(100)    
+    bst.insert(42)
+    bst.insert(55)
+    bst.insert(40)
+    bst.insert(58)    
+    bst.insert(42)
+    bst.insert(55)
+    bst.insert(40)
+    bst.insert(58)    
+    bst.insert(42)
+
+    assert bst.size == 12
+
+    bst.delete_node(48)
+    assert bst.size == 11
+    bst.delete_node(42)    
+    assert bst.size == 10
+    bst.delete_node(42)
+    assert bst.size == 9
+    bst.delete_node(42)
+    assert bst.size == 8
+    bst.delete_node(100)
+    assert bst.size == 7
+
+    bst.delete_node(100)
+
+    assert bst.size == 7
+
 # def test_complex_delete():
 #     bst = RedBlackTree()
 
@@ -66,3 +96,23 @@ def test_accessors():
     assert bst.predecessor(bst.searchTree(42)).item == 40
     assert bst.predecessor(bst.searchTree(55)).item == 42
     assert bst.predecessor(bst.searchTree(58)).item == 55    
+
+def test_print():
+    bst = RedBlackTree()    
+    bst.insert(73)
+    bst.insert(48)
+    bst.insert(100)    
+    bst.insert(42)
+    bst.insert(55)
+    bst.insert(40)
+    bst.insert(58)    
+    bst.insert(42)
+    bst.insert(55)
+    bst.insert(40)
+    bst.insert(58)    
+    bst.insert(42)
+
+    bst.print_tree()
+    bst.preorder()
+    bst.inorder()
+    bst.postorder()
