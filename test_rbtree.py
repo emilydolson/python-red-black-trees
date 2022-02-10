@@ -137,14 +137,14 @@ def test_complex_delete():
     with open("small_input.txt") as infile:
         for line in infile:
             sline = line.split()
-            print(sline, bst.searchTree(int(sline[1])) == bst.TNULL)
+            # print(sline, bst.searchTree(int(sline[1])) == bst.TNULL)
             if sline[0] == "a":
                 # print("add")
                 bst.insert(int(sline[1]))
             else:
                 # print("delete")
                 bst.delete_node(int(sline[1]))
-            bst.print_tree()
+            # bst.print_tree()
             check_valid(bst)
 
 
@@ -154,14 +154,14 @@ def test_long():
     with open("test_input.txt") as infile:
         for line in infile:
             sline = line.split()
-            print(sline, bst.searchTree(int(sline[1])) == bst.TNULL)
+            # print(sline, bst.searchTree(int(sline[1])) == bst.TNULL)
             if sline[0] == "a":
                 # print("add")
                 bst.insert(int(sline[1]))
             else:
                 # print("delete")
                 bst.delete_node(int(sline[1]))
-            bst.print_tree()
+            # bst.print_tree()
             check_valid(bst)
 
 
