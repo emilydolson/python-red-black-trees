@@ -95,7 +95,10 @@ def test_accessors():
     assert bst.successor(bst.searchTree(55)).item == 58
     assert bst.predecessor(bst.searchTree(42)).item == 40
     assert bst.predecessor(bst.searchTree(55)).item == 42
-    assert bst.predecessor(bst.searchTree(58)).item == 55    
+    assert bst.predecessor(bst.searchTree(58)).item == 55   
+
+    bst.insert(57) 
+    assert bst.predecessor(bst.searchTree(57)).item == 55
 
 def test_print():
     bst = RedBlackTree()    
