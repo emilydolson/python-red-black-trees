@@ -171,6 +171,7 @@ def test_accessors():
 def test_print():
     bst = RedBlackTree()    
     bst.insert(73)
+    print(bst.get_root())
     bst.insert(48)
     bst.insert(100)    
     bst.insert(42)
