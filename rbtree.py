@@ -22,6 +22,7 @@ class RedBlackTree():
         self.TNULL.left = None
         self.TNULL.right = None
         self.root = self.TNULL
+        self.size = 0
 
     # Preorder
     def pre_order_helper(self, node):
@@ -55,6 +56,9 @@ class RedBlackTree():
 
     # Balancing the tree after deletion
     def delete_fix(self, x):
+        # print(x.item, x is None, self.size, x.parent.right.left is None, x.parent.right.right is None)
+        # if x.parent.right.right is None:
+        #     self.print_tree()
         while x != self.root and x.color == 0:
             if x == x.parent.left:
                 s = x.parent.right
@@ -132,9 +136,11 @@ class RedBlackTree():
         y = z
         y_original_color = y.color
         if z.left == self.TNULL:
+            # If no left child, just scoot the right subtree up
             x = z.right
             self.__rb_transplant(z, z.right)
         elif (z.right == self.TNULL):
+            # If no right child, just scott the left subtree up
             x = z.left
             self.__rb_transplant(z, z.left)
         else:
@@ -154,6 +160,8 @@ class RedBlackTree():
             y.color = z.color
         if y_original_color == 0:
             self.delete_fix(x)
+
+        self.size -= 1
 
     # Balance the tree after insertion
     def fix_insert(self, k):
@@ -324,6 +332,7 @@ class RedBlackTree():
             return
 
         self.fix_insert(node)
+        self.size += 1
 
     def get_root(self):
         return self.root
