@@ -65,7 +65,7 @@ class RedBlackTree():
 
     # Balancing the tree after deletion
     def delete_fix(self, x):
-        # print(x.item, x is None, self.size, x.parent.right.left is None, x.parent.right.right is None)
+        # print(x.item, x == self.TNULL, x is None, self.size, x.parent, x.parent.left, x.parent.right, x.parent.right.left, x.parent.right.right)
         # if x.parent.right.right is None:
         #     self.print_tree()
         while x != self.root and x.color == 0:
@@ -100,7 +100,7 @@ class RedBlackTree():
                     self.right_rotate(x.parent)
                     s = x.parent.left
 
-                if s.right.color == 0 and s.right.color == 0:
+                if s.left.color == 0 and s.right.color == 0:
                     s.color = 1
                     x = x.parent
                 else:
@@ -149,7 +149,7 @@ class RedBlackTree():
             x = z.right
             self.__rb_transplant(z, z.right)
         elif (z.right == self.TNULL):
-            # If no right child, just scott the left subtree up
+            # If no right child, just scoot the left subtree up
             x = z.left
             self.__rb_transplant(z, z.left)
         else:
@@ -167,6 +167,8 @@ class RedBlackTree():
             y.left = z.left
             y.left.parent = y
             y.color = z.color
+        print("in prc")
+        self.print_tree()
         if y_original_color == 0:
             self.delete_fix(x)
 
@@ -213,10 +215,10 @@ class RedBlackTree():
         if node != self.TNULL:
             sys.stdout.write(indent)
             if last:
-                sys.stdout.write("R----")
+                sys.stdout.write("R----  ")
                 indent += "     "
             else:
-                sys.stdout.write("L----")
+                sys.stdout.write("L----   ")
                 indent += "|    "
 
             s_color = "RED" if node.color == 1 else "BLACK"
