@@ -105,7 +105,7 @@ class RedBlackTree():
         x.color = 0
 
     def __rb_transplant(self, u, v):
-        if u.parent == None:
+        if u.parent is None:
             self.root = v
         elif u == u.parent.left:
             u.parent.left = v
@@ -219,7 +219,7 @@ class RedBlackTree():
     def searchTree(self, k):
         return self.search_tree_helper(self.root, k)
 
-    def minimum(self, node = None):
+    def minimum(self, node=None):
         if node is None:
             node = self.root
         if node == self.TNULL:
@@ -228,7 +228,7 @@ class RedBlackTree():
             node = node.left
         return node
 
-    def maximum(self, node = None):
+    def maximum(self, node=None):
         if node is None:
             node = self.root
         if node == self.TNULL:
@@ -265,7 +265,7 @@ class RedBlackTree():
             y.left.parent = x
 
         y.parent = x.parent
-        if x.parent == None:
+        if x.parent is None:
             self.root = y
         elif x == x.parent.left:
             x.parent.left = y
@@ -281,7 +281,7 @@ class RedBlackTree():
             y.right.parent = x
 
         y.parent = x.parent
-        if x.parent == None:
+        if x.parent is None:
             self.root = y
         elif x == x.parent.right:
             x.parent.right = y
@@ -309,18 +309,18 @@ class RedBlackTree():
                 x = x.right
 
         node.parent = y
-        if y == None:
+        if y is None:
             self.root = node
         elif node.item < y.item:
             y.left = node
         else:
             y.right = node
 
-        if node.parent == None:
+        if node.parent is None:
             node.color = 0
             return
 
-        if node.parent.parent == None:
+        if node.parent.parent is None:
             return
 
         self.fix_insert(node)
