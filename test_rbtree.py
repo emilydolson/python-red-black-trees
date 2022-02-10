@@ -50,13 +50,13 @@ def check_valid(bst):
 def test_insert():
     bst = RedBlackTree()
     bst.insert(55)
-    assert bst.searchTree(55).item == 55
+    assert bst.search(55).item == 55
     bst.insert(40)
-    assert bst.searchTree(40).item == 40    
+    assert bst.search(40).item == 40    
     bst.insert(58)    
-    assert bst.searchTree(58).item == 58
+    assert bst.search(58).item == 58
     bst.insert(42)
-    assert bst.searchTree(42).item == 42
+    assert bst.search(42).item == 42
 
     bst.insert(42)
     bst.insert(42)
@@ -85,17 +85,17 @@ def test_insert():
 
 def test_search():
     bst = RedBlackTree()
-    assert bst.searchTree(60) == bst.TNULL
+    assert bst.search(60) == bst.TNULL
     bst.insert(30)
-    assert bst.searchTree(30).item == 30
+    assert bst.search(30).item == 30
     
 
 def test_delete():
     bst = RedBlackTree()
     bst.insert(78)
-    assert bst.searchTree(78).item == 78
-    bst.delete_node(78)
-    assert bst.searchTree(78) == bst.TNULL
+    assert bst.search(78).item == 78
+    bst.delete(78)
+    assert bst.search(78) == bst.TNULL
 
     bst.insert(73)
     bst.insert(48)
@@ -112,20 +112,20 @@ def test_delete():
 
     assert bst.size == 12
 
-    bst.delete_node(48)
+    bst.delete(48)
     assert bst.size == 11
-    bst.delete_node(42)    
+    bst.delete(42)    
     assert bst.size == 10
-    bst.delete_node(42)
+    bst.delete(42)
     assert bst.size == 9
-    assert bst.searchTree(42).item == 42
-    bst.delete_node(42)
-    assert bst.searchTree(42) == bst.TNULL    
+    assert bst.search(42).item == 42
+    bst.delete(42)
+    assert bst.search(42) == bst.TNULL    
     assert bst.size == 8
-    bst.delete_node(100)
+    bst.delete(100)
     assert bst.size == 7
 
-    bst.delete_node(100)
+    bst.delete(100)
 
     assert bst.size == 7
     check_valid(bst)
@@ -143,26 +143,26 @@ def test_complex_delete():
                 bst.insert(int(sline[1]))
             else:
                 # print("delete")
-                bst.delete_node(int(sline[1]))
+                bst.delete(int(sline[1]))
             # bst.print_tree()
             check_valid(bst)
 
 
-def test_long():
-    bst = RedBlackTree()
+# def test_long():
+#     bst = RedBlackTree()
 
-    with open("test_input.txt") as infile:
-        for line in infile:
-            sline = line.split()
-            # print(sline, bst.searchTree(int(sline[1])) == bst.TNULL)
-            if sline[0] == "a":
-                # print("add")
-                bst.insert(int(sline[1]))
-            else:
-                # print("delete")
-                bst.delete_node(int(sline[1]))
-            # bst.print_tree()
-            check_valid(bst)
+#     with open("test_input.txt") as infile:
+#         for line in infile:
+#             sline = line.split()
+#             # print(sline, bst.searchTree(int(sline[1])) == bst.TNULL)
+#             if sline[0] == "a":
+#                 # print("add")
+#                 bst.insert(int(sline[1]))
+#             else:
+#                 # print("delete")
+#                 bst.delete(int(sline[1]))
+#             # bst.print_tree()
+#             check_valid(bst)
 
 
 def test_dictionary():
@@ -180,8 +180,8 @@ def test_get_root():
 
 def test_accessors():
     bst = RedBlackTree()
-    assert bst.maximum().item == float("-inf")
-    assert bst.minimum().item == float("inf")
+    assert bst.maximum() == bst.TNULL
+    assert bst.minimum() == bst.TNULL
 
     bst.insert(55)
     bst.insert(40)
@@ -191,15 +191,15 @@ def test_accessors():
 
     assert bst.maximum().item == 58
     assert bst.minimum().item == 40
-    assert bst.successor(bst.searchTree(42)).item == 55
-    assert bst.successor(bst.searchTree(40)).item == 42
-    assert bst.successor(bst.searchTree(55)).item == 58
-    assert bst.predecessor(bst.searchTree(42)).item == 40
-    assert bst.predecessor(bst.searchTree(55)).item == 42
-    assert bst.predecessor(bst.searchTree(58)).item == 55   
+    assert bst.successor(bst.search(42)).item == 55
+    assert bst.successor(bst.search(40)).item == 42
+    assert bst.successor(bst.search(55)).item == 58
+    assert bst.predecessor(bst.search(42)).item == 40
+    assert bst.predecessor(bst.search(55)).item == 42
+    assert bst.predecessor(bst.search(58)).item == 55   
 
     bst.insert(57) 
-    assert bst.predecessor(bst.searchTree(57)).item == 55
+    assert bst.predecessor(bst.search(57)).item == 55
 
 
 def test_print():
@@ -250,20 +250,20 @@ def test_elaborate_delete():
     bst.insert(109)
     bst.insert(102)
 
-    bst.delete_node(15)
-    bst.delete_node(55)
-    bst.delete_node(103)
-    bst.delete_node(106)
-    bst.delete_node(107)
-    bst.delete_node(101)
-    bst.delete_node(42)
-    bst.delete_node(42)
-    bst.delete_node(42)
-    bst.delete_node(10)
-    bst.delete_node(40)
-    bst.delete_node(58)
-    bst.delete_node(100)
-    bst.delete_node(42)
+    bst.delete(15)
+    bst.delete(55)
+    bst.delete(103)
+    bst.delete(106)
+    bst.delete(107)
+    bst.delete(101)
+    bst.delete(42)
+    bst.delete(42)
+    bst.delete(42)
+    bst.delete(10)
+    bst.delete(40)
+    bst.delete(58)
+    bst.delete(100)
+    bst.delete(42)
 
     bst.print_tree()
     check_valid(bst)    
@@ -296,11 +296,11 @@ def test_duplicates():
     bst.insert(42)
     bst.insert(42)
 
-    bst.delete_node(42)
-    bst.delete_node(42)
-    bst.delete_node(42)
-    bst.delete_node(42)
-    bst.delete_node(42)
-    bst.delete_node(42)
-    bst.delete_node(42)                        
+    bst.delete(42)
+    bst.delete(42)
+    bst.delete(42)
+    bst.delete(42)
+    bst.delete(42)
+    bst.delete(42)
+    bst.delete(42)                        
     check_valid(bst)

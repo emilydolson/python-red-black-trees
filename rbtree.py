@@ -233,14 +233,14 @@ class RedBlackTree():
     def postorder(self):
         self.post_order_helper(self.root)
 
-    def searchTree(self, k):
+    def search(self, k):
         return self.search_tree_helper(self.root, k)
 
     def minimum(self, node=None):
         if node is None:
             node = self.root
         if node == self.TNULL:
-            return Node(float("inf"))
+            return self.TNULL
         while node.left != self.TNULL:
             node = node.left
         return node
@@ -249,7 +249,7 @@ class RedBlackTree():
         if node is None:
             node = self.root
         if node == self.TNULL:
-            return Node(float("-inf"))
+            return self.TNULL
         while node.right != self.TNULL:
             node = node.right
         return node
@@ -347,17 +347,17 @@ class RedBlackTree():
     def get_root(self):
         return self.root
 
-    def delete_node(self, item):
+    def delete(self, item):
         self.delete_node_helper(self.root, item)
 
     def print_tree(self):
         self.__print_helper(self.root, "", True)
 
     def __getitem__(self, key):
-        return self.searchTree(key).value
+        return self.search(key).value
 
     def __setitem__(self, key, value):
-        self.searchTree(key).value = value
+        self.search(key).value = value
 
 
 # if __name__ == "__main__":
