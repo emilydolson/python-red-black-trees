@@ -1,5 +1,43 @@
 from rbtree import RedBlackTree, Node
 
+def check_node_valid(bst, node):
+    if node == bst.TNULL:
+        assert node.color == 0
+        return
+
+    if node.color == 1:
+        assert node.left.color == 0
+        assert node.right.color == 0
+
+def check_valid_recur(bst, node):
+    check_node_valid(bst, node)
+
+    if node == bst.TNULL:
+        return 1
+
+    if node.left == bst.TNULL and node.right == bst.TNULL:
+        if node.color == 0:
+            return 2
+        else:
+            return 1
+
+    left_count = check_valid_recur(bst, node.left)
+    right_count = check_valid_recur(bst, node.right)
+
+    assert left_count == right_count
+
+    cur_count = left_count # doesn't matter which one we choose because they're the same
+    if node.color == 0:
+        cur_count += 1 
+
+    return cur_count
+
+def check_valid(bst):
+    root = bst.get_root()
+    assert root.color == 0
+
+    check_valid_recur(bst, root)
+
 def test_insert():
     bst = RedBlackTree()
     bst.insert(55)
@@ -31,9 +69,15 @@ def test_insert():
     bst.insert(109)
     bst.insert(102)
 
+    assert bst.size == 23
+
+    check_valid(bst)
+
 def test_search():
     bst = RedBlackTree()
     assert bst.searchTree(60) == bst.TNULL
+    bst.insert(30)
+    assert bst.searchTree(30).item == 30
     
 def test_delete():
     bst = RedBlackTree()
@@ -73,20 +117,22 @@ def test_delete():
     bst.delete_node(100)
 
     assert bst.size == 7
+    check_valid(bst)
 
-# def test_complex_delete():
-#     bst = RedBlackTree()
+def test_complex_delete():
+    bst = RedBlackTree()
 
-#     with open("test_input.txt") as infile:
-#         for line in infile:
-#             sline = line.split()
-#             # print(sline, bst.searchTree(sline[1]) == bst.TNULL)
-#             if sline[0] == "a":
-#                 # print("add")
-#                 bst.insert(int(sline[1]))
-#             else:
-#                 # print("delete")
-#                 bst.delete_node(int(sline[1]))
+    # with open("small_input.txt") as infile:
+    #     for line in infile:
+    #         sline = line.split()
+    #         # print(sline, bst.searchTree(sline[1]) == bst.TNULL)
+    #         if sline[0] == "a":
+    #             # print("add")
+    #             bst.insert(int(sline[1]))
+    #         else:
+    #             # print("delete")
+    #             bst.delete_node(int(sline[1]))
+    #         check_valid(bst)
 
 def test_dictionary():
     bst = RedBlackTree()
@@ -141,3 +187,84 @@ def test_print():
     bst.preorder()
     bst.inorder()
     bst.postorder()
+
+def test_elaborate_delete():
+    bst = RedBlackTree()
+    bst.insert(55)
+    bst.insert(40)
+    bst.insert(58)    
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(43)
+    bst.insert(44)
+    bst.insert(40)
+    bst.insert(-10)
+    bst.insert(10)
+    bst.insert(15)
+    bst.insert(11)
+    bst.insert(100)    
+    bst.insert(101)
+    bst.insert(103)
+    bst.insert(106)
+    bst.insert(107)
+    bst.insert(109)
+    bst.insert(102)
+
+    bst.delete_node(15)
+    bst.delete_node(55)
+    bst.delete_node(103)
+    bst.delete_node(106)
+    bst.delete_node(107)
+    bst.delete_node(101)
+    bst.delete_node(42)
+    bst.delete_node(42)
+    bst.delete_node(42)
+    bst.delete_node(10)
+    bst.delete_node(40)
+    bst.delete_node(58)
+    bst.delete_node(100)
+    bst.delete_node(42)
+
+    bst.print_tree()
+    check_valid(bst)    
+    # assert False
+
+def test_duplicates():
+    bst = RedBlackTree()
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)    
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)    
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+
+    bst.delete_node(42)
+    bst.delete_node(42)
+    bst.delete_node(42)
+    bst.delete_node(42)
+    bst.delete_node(42)
+    bst.delete_node(42)
+    bst.delete_node(42)                        
+    check_valid(bst)
+

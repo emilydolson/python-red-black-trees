@@ -6,7 +6,10 @@ import sys
 
 # Node creation
 class Node():
+    next_id = 0
     def __init__(self, item):
+        self.id = Node.next_id
+        Node.next_id += 1
         self.item = item
         self.parent = None
         self.left = None
@@ -14,10 +17,16 @@ class Node():
         self.color = 1
         self.value = None
 
+    def __eq__(self, other):
+        return self.id == other.id
+
+    def __repr__(self):
+        return "ID: " + str(self.id) + " Value: " + str(self.item)        
 
 class RedBlackTree():
     def __init__(self):
         self.TNULL = Node(0)
+        self.TNULL.id = -1
         self.TNULL.color = 0
         self.TNULL.left = None
         self.TNULL.right = None
