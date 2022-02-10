@@ -11,6 +11,26 @@ def test_insert():
     bst.insert(42)
     assert bst.searchTree(42).item == 42
 
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(42)
+    bst.insert(43)
+    bst.insert(44)
+    bst.insert(40)
+    bst.insert(-10)
+    bst.insert(10)
+    bst.insert(15)
+    bst.insert(11)
+    bst.insert(100)    
+    bst.insert(101)
+    bst.insert(103)
+    bst.insert(106)
+    bst.insert(107)
+    bst.insert(109)
+    bst.insert(102)
+
 def test_search():
     bst = RedBlackTree()
     assert bst.searchTree(60) == bst.TNULL
@@ -43,7 +63,9 @@ def test_delete():
     assert bst.size == 10
     bst.delete_node(42)
     assert bst.size == 9
+    assert bst.searchTree(42).item == 42
     bst.delete_node(42)
+    assert bst.searchTree(42) == bst.TNULL    
     assert bst.size == 8
     bst.delete_node(100)
     assert bst.size == 7
