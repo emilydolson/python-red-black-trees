@@ -148,21 +148,21 @@ def test_complex_delete():
             check_valid(bst)
 
 
-# def test_long():
-#     bst = RedBlackTree()
+def test_long():
+    bst = RedBlackTree()
 
-#     with open("test_input.txt") as infile:
-#         for line in infile:
-#             sline = line.split()
-#             # print(sline, bst.searchTree(int(sline[1])) == bst.TNULL)
-#             if sline[0] == "a":
-#                 # print("add")
-#                 bst.insert(int(sline[1]))
-#             else:
-#                 # print("delete")
-#                 bst.delete(int(sline[1]))
-#             # bst.print_tree()
-#             check_valid(bst)
+    with open("test_input.txt") as infile:
+        for line in infile:
+            sline = line.split()
+            # print(sline, bst.searchTree(int(sline[1])) == bst.TNULL)
+            if sline[0] == "a":
+                # print("add")
+                bst.insert(int(sline[1]))
+            else:
+                # print("delete")
+                bst.delete(int(sline[1]))
+            # bst.print_tree()
+            check_valid(bst)
 
 
 def test_dictionary():
