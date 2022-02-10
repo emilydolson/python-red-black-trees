@@ -167,8 +167,6 @@ class RedBlackTree():
             y.left = z.left
             y.left.parent = y
             y.color = z.color
-        print("in prc")
-        self.print_tree()
         if y_original_color == 0:
             self.delete_fix(x)
 
