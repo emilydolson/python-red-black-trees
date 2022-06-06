@@ -6,7 +6,7 @@ A Python implementation of red-black trees. This code was originally copied from
 
 ## What is this for?
 
-I made this repo so that students in my algorithms class can try out red-black trees without needing to use C++. Feel free to use it for similar educational purposes! For more practical use-cases, you're probably better off useing the [SortedContainers](http://www.grantjenks.com/docs/sortedcontainers/) library. 
+I made this repo so that students in my algorithms class can try out red-black trees without needing to use C++. Feel free to use it for similar educational purposes! For more practical use-cases, you're probably better off using the [SortedContainers](http://www.grantjenks.com/docs/sortedcontainers/) library, which is more efficient, more scalable, and better maintained.
 
 
 ## Documentation
