@@ -376,5 +376,5 @@ class RedBlackTree():
 #     bst.print_tree()
 
 #     print("\nAfter deleting an element")
-#     bst.delete_node(40)
+#     bst.delete(40)
 #     bst.print_tree()
