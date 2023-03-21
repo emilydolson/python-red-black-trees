@@ -40,8 +40,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        pytest
-        coveralls --service=github
+        pytest --cov=src
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v1
         
   flake8:
     runs-on: ubuntu-latest
