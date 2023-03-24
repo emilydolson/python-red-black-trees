@@ -1,5 +1,5 @@
 pytest
 pytest-cov
-coveralls
+pytest-codecov
 pep8-naming
 flake8-annotations
