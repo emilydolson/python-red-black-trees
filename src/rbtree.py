@@ -51,7 +51,7 @@ class Node():
     def depth(self: T) -> int:
         return 0 if self.parent is None else self.parent.depth() + 1
 
-        
+
 T = TypeVar('T', bound='RedBlackTree')
 
 
