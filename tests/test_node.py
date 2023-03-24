@@ -43,4 +43,3 @@ def test_depth() -> None:
     second_node.parent = node
     node.left = second_node
     assert second_node.depth == 1
-    
