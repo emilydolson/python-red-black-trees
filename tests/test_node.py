@@ -15,9 +15,11 @@ def test_set_get_color() -> None:
     node.set_color("black")
     assert node.get_color() == "black"
     assert node.is_black()
+    assert not node.is_red()
     node.set_color("red")
     assert node.get_color() == "red"
     assert node.is_red()
+    assert not node.is_black()
 
 
 def test_not_null() -> None:
