@@ -49,4 +49,4 @@ def test_depth() -> None:
 def test_color_exception() -> None:
     node = Node(0)
     with pytest.raises(Exception):
-        node.set_color("black")
+        node.set_color("spam")
