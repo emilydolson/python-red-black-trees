@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "python-red-black-trees"
 version = "0.0.1"
 authors = [
-  { name="Emily Dolson", email="me@me.com" },
+  { name="Emily Dolson", email="emilyldolson@gmail.com" },
 ]
 description = "Red-black tree implementation in Python."
 readme = "README.md"
