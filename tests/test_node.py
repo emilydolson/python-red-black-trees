@@ -1,3 +1,4 @@
+import pytest
 from rbtree import Node
 
 
@@ -43,3 +44,9 @@ def test_depth() -> None:
     second_node.parent = node
     node.left = second_node
     assert second_node.depth() == 1
+
+
+def test_color_exception() -> None:
+    node = Node(0)
+    with pytest.raises(Exception):
+        node.set_color("black")
