@@ -2,28 +2,28 @@ from rbtree import RedBlackTree, Node
 
 
 def check_node_valid(bst: RedBlackTree, node: Node) -> None:
-    if node == bst.TNULL:
-        assert node.color == 0
+    if node.is_null():
+        assert node.is_black()
         return
 
-    if node.color == 1:
-        assert node.left.color == 0
-        assert node.right.color == 0
+    if node.is_red():
+        assert node.left.is_black()
+        assert node.right.is_black()
 
-    if node.left != bst.TNULL and node.left is not None:
+    if not node.left.is_null() and node.left is not None:
         assert node.item >= node.left.item
-    if node.right != bst.TNULL and node.right is not None:
+    if not node.right.is_null() and node.right is not None:
         assert node.item <= node.right.item
 
 
 def check_valid_recur(bst: RedBlackTree, node: Node) -> int:
     check_node_valid(bst, node)
 
-    if node == bst.TNULL:
+    if node.is_null():
         return 1
 
-    if node.left == bst.TNULL and node.right == bst.TNULL:
-        if node.color == 0:
+    if node.left.is_null() and node.right.is_null():
+        if node.is_black():
             return 2
         else:
             return 1
@@ -35,7 +35,7 @@ def check_valid_recur(bst: RedBlackTree, node: Node) -> int:
 
     # doesn't matter which one we choose because they're the same
     cur_count = left_count
-    if node.color == 0:
+    if node.is_black():
         cur_count += 1
 
     return cur_count
@@ -43,7 +43,7 @@ def check_valid_recur(bst: RedBlackTree, node: Node) -> int:
 
 def check_valid(bst: RedBlackTree) -> None:
     root = bst.get_root()
-    assert root.color == 0
+    assert root.is_black()
 
     check_valid_recur(bst, root)
 
@@ -86,7 +86,7 @@ def test_insert() -> None:
 
 def test_search() -> None:
     bst = RedBlackTree()
-    assert bst.search(60) == bst.TNULL
+    assert bst.search(60).is_null()
     bst.insert(30)
     assert bst.search(30).item == 30
 
@@ -96,7 +96,7 @@ def test_delete() -> None:
     bst.insert(78)
     assert bst.search(78).item == 78
     bst.delete(78)
-    assert bst.search(78) == bst.TNULL
+    assert bst.search(78).is_null()
 
     bst.insert(73)
     bst.insert(48)
@@ -121,7 +121,7 @@ def test_delete() -> None:
     assert bst.size == 9
     assert bst.search(42).item == 42
     bst.delete(42)
-    assert bst.search(42) == bst.TNULL
+    assert bst.search(42).is_null()
     assert bst.size == 8
     bst.delete(100)
     assert bst.size == 7
@@ -165,15 +165,15 @@ def test_dictionary() -> None:
 
 def test_get_root() -> None:
     bst = RedBlackTree()
-    assert bst.get_root() == bst.TNULL
+    assert bst.get_root().is_null()
     bst.insert(3)
     assert bst.get_root().item == 3
 
 
 def test_accessors() -> None:
     bst = RedBlackTree()
-    assert bst.maximum() == bst.TNULL
-    assert bst.minimum() == bst.TNULL
+    assert bst.maximum().is_null()
+    assert bst.minimum().is_null()
 
     bst.insert(55)
     bst.insert(40)
