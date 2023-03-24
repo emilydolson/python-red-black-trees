@@ -46,7 +46,7 @@ class Node():
         return self.color == 0
 
     def is_null(self: T) -> bool:
-        return self.key == -1
+        return self.id == -1
 
     def depth(self: T) -> int:
         return 0 if self.parent is None else self.parent.depth() + 1
