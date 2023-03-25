@@ -77,15 +77,27 @@ bst.successor(bst.search(6))  # Gets the successor a node containing 6
 
 ```
 
-#### Printing methods
+#### Printing 
 
-To know more about the contents of the tree, you can use various printing methods:
+To know more about the contents of the tree, you can print it to stdout:
 
 ```
 bst.print_tree()  # prints an ASCII representation of the whole tree
-bst.preorder()      # prints a preorder traversal
-bst.inorder()       # prints an inorder traveral
-bst.postorder()     # prints a postorder traversal
+
+#### Traversals 
+
+To contents of the tree can be collected into an array in any of three ways.
+The tree itself can be used anywhere a collection is used.
+
+```
+bst.preorder()      # creates a preorder traversal list
+bst.inorder()       # creates an inorder traveral list
+bst.postorder()     # creates a postorder traversal list
+
+key_string = ""
+bst.set_iteration_style("pre")
+for node in bst:
+    key_string += str(node.get_key()) + " "
 ```
 
 ### Dictionary interface
