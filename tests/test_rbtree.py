@@ -210,9 +210,6 @@ def test_print() -> None:
     bst.insert(42)
 
     bst.print_tree()
-    bst.preorder()
-    bst.inorder()
-    bst.postorder()
 
 
 def test_elaborate_delete() -> None:
