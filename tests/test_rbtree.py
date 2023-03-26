@@ -1,3 +1,4 @@
+import pytest
 from rbtree import RedBlackTree, Node
 
 
@@ -191,6 +192,69 @@ def test_accessors() -> None:
 
     bst.insert(57)
     assert bst.predecessor(bst.search(57)).item == 55
+
+
+def test_preorder() -> None:
+    bst = RedBlackTree()
+    bst.insert(1)
+    bst.insert(2)
+    bst.insert(3)
+
+    nodes = bst.preorder()
+    keys = []
+    for node in nodes:
+        keys.append(str(node.get_key()))
+    assert " ".join(keys) == "2 1 3"
+
+    keys = []
+    bst.set_iteration_style("pre")
+    for node in bst:
+        keys.append(str(node.get_key()))
+    assert " ".join(keys) == "2 1 3"
+
+
+def test_inorder() -> None:
+    bst = RedBlackTree()
+    bst.insert(1)
+    bst.insert(2)
+    bst.insert(3)
+
+    nodes = bst.inorder()
+    keys = []
+    for node in nodes:
+        keys.append(str(node.get_key()))
+    assert " ".join(keys) == "1 2 3"
+
+    keys = []
+    bst.set_iteration_style("in")
+    for node in bst:
+        keys.append(str(node.get_key()))
+    assert " ".join(keys) == "1 2 3"
+
+
+def test_postorder() -> None:
+    bst = RedBlackTree()
+    bst.insert(1)
+    bst.insert(2)
+    bst.insert(3)
+
+    nodes = bst.postorder()
+    keys = []
+    for node in nodes:
+        keys.append(str(node.get_key()))
+    assert " ".join(keys) == "1 3 2"
+
+    keys = []
+    bst.set_iteration_style("post")
+    for node in bst:
+        keys.append(str(node.get_key()))
+    assert " ".join(keys) == "1 3 2"
+
+
+def test_iterator_exception() -> None:
+    bst = RedBlackTree()
+    with pytest.raises(Exception):
+        bst.set_iteration_style("spam")
 
 
 def test_print() -> None:
