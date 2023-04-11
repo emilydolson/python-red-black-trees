@@ -12,9 +12,9 @@ def check_node_valid(bst: RedBlackTree, node: Node) -> None:
         assert node.right.is_black()
 
     if not node.left.is_null() and node.left is not None:
-        assert node.item >= node.left.item
+        assert node.get_key() >= node.left.get_key()
     if not node.right.is_null() and node.right is not None:
-        assert node.item <= node.right.item
+        assert node.get_key() <= node.right.get_key()
 
 
 def check_valid_recur(bst: RedBlackTree, node: Node) -> int:
@@ -52,13 +52,13 @@ def check_valid(bst: RedBlackTree) -> None:
 def test_insert() -> None:
     bst = RedBlackTree()
     bst.insert(55)
-    assert bst.search(55).item == 55
+    assert bst.search(55).get_key() == 55
     bst.insert(40)
-    assert bst.search(40).item == 40
+    assert bst.search(40).get_key() == 40
     bst.insert(58)
-    assert bst.search(58).item == 58
+    assert bst.search(58).get_key() == 58
     bst.insert(42)
-    assert bst.search(42).item == 42
+    assert bst.search(42).get_key() == 42
 
     bst.insert(42)
     bst.insert(42)
@@ -89,13 +89,13 @@ def test_search() -> None:
     bst = RedBlackTree()
     assert bst.search(60).is_null()
     bst.insert(30)
-    assert bst.search(30).item == 30
+    assert bst.search(30).get_key() == 30
 
 
 def test_delete() -> None:
     bst = RedBlackTree()
     bst.insert(78)
-    assert bst.search(78).item == 78
+    assert bst.search(78).get_key() == 78
     bst.delete(78)
     assert bst.search(78).is_null()
 
@@ -120,7 +120,7 @@ def test_delete() -> None:
     assert bst.size == 10
     bst.delete(42)
     assert bst.size == 9
-    assert bst.search(42).item == 42
+    assert bst.search(42).get_key() == 42
     bst.delete(42)
     assert bst.search(42).is_null()
     assert bst.size == 8
@@ -168,7 +168,7 @@ def test_get_root() -> None:
     bst = RedBlackTree()
     assert bst.get_root().is_null()
     bst.insert(3)
-    assert bst.get_root().item == 3
+    assert bst.get_root().get_key() == 3
 
 
 def test_accessors() -> None:
@@ -181,17 +181,17 @@ def test_accessors() -> None:
     bst.insert(58)
     bst.insert(42)
 
-    assert bst.maximum().item == 58
-    assert bst.minimum().item == 40
-    assert bst.successor(bst.search(42)).item == 55
-    assert bst.successor(bst.search(40)).item == 42
-    assert bst.successor(bst.search(55)).item == 58
-    assert bst.predecessor(bst.search(42)).item == 40
-    assert bst.predecessor(bst.search(55)).item == 42
-    assert bst.predecessor(bst.search(58)).item == 55
+    assert bst.maximum().get_key() == 58
+    assert bst.minimum().get_key() == 40
+    assert bst.successor(bst.search(42)).get_key() == 55
+    assert bst.successor(bst.search(40)).get_key() == 42
+    assert bst.successor(bst.search(55)).get_key() == 58
+    assert bst.predecessor(bst.search(42)).get_key() == 40
+    assert bst.predecessor(bst.search(55)).get_key() == 42
+    assert bst.predecessor(bst.search(58)).get_key() == 55
 
     bst.insert(57)
-    assert bst.predecessor(bst.search(57)).item == 55
+    assert bst.predecessor(bst.search(57)).get_key() == 55
 
 
 def test_preorder() -> None:

@@ -12,10 +12,10 @@ T = TypeVar('T', bound='Node')
 class Node():
     next_id = 0
 
-    def __init__(self: T, item: int) -> None:
+    def __init__(self: T, key: int) -> None:
         self.id = Node.next_id
         Node.next_id += 1
-        self.item = item
+        self._key = key
         self.parent = None
         self.left = None
         self.right = None
@@ -26,7 +26,7 @@ class Node():
         return self.id == other.id
 
     def __repr__(self: T) -> str:
-        return "ID: " + str(self.id) + " Value: " + str(self.item)
+        return "Key: " + str(self._key) + " Value: " + str(self.value)
 
     def get_color(self: T) -> str:
         return "black" if self.color == 0 else "red"
@@ -40,7 +40,7 @@ class Node():
             raise Exception("Unknown color")
 
     def get_key(self: T) -> int:
-        return self.item
+        return self._key
 
     def is_red(self: T) -> bool:
         return self.color == 1
@@ -151,10 +151,10 @@ class RedBlackTree():
 
     # Search the tree
     def search_tree_helper(self: T, node: Node, key: int) -> Node:
-        if node.is_null() or key == node.item:
+        if node.is_null() or key == node.get_key():
             return node
 
-        if key < node.item:
+        if key < node.get_key():
             return self.search_tree_helper(node.left, key)
         return self.search_tree_helper(node.right, key)
 
@@ -222,10 +222,10 @@ class RedBlackTree():
     def delete_node_helper(self: T, node: Node, key: int) -> None:
         z = self.TNULL
         while not node.is_null():
-            if node.item == key:
+            if node.get_key() == key:
                 z = node
 
-            if node.item <= key:
+            if node.get_key() <= key:
                 node = node.right
             else:
                 node = node.left
@@ -265,38 +265,38 @@ class RedBlackTree():
         self.size -= 1
 
     # Balance the tree after insertion
-    def fix_insert(self: T, k: Node) -> None:
-        while k.parent.is_red():
-            if k.parent == k.parent.parent.right:
-                u = k.parent.parent.left
+    def fix_insert(self: T, node: Node) -> None:
+        while node.parent.is_red():
+            if node.parent == node.parent.parent.right:
+                u = node.parent.parent.left
                 if u.is_red():
                     u.set_color("black")
-                    k.parent.set_color("black")
-                    k.parent.parent.set_color("red")
-                    k = k.parent.parent
+                    node.parent.set_color("black")
+                    node.parent.parent.set_color("red")
+                    node = node.parent.parent
                 else:
-                    if k == k.parent.left:
-                        k = k.parent
-                        self.right_rotate(k)
-                    k.parent.set_color("black")
-                    k.parent.parent.set_color("red")
-                    self.left_rotate(k.parent.parent)
+                    if node == node.parent.left:
+                        node = node.parent
+                        self.right_rotate(node)
+                    node.parent.set_color("black")
+                    node.parent.parent.set_color("red")
+                    self.left_rotate(node.parent.parent)
             else:
-                u = k.parent.parent.right
+                u = node.parent.parent.right
 
                 if u.is_red():
                     u.set_color("black")
-                    k.parent.set_color("black")
-                    k.parent.parent.set_color("red")
-                    k = k.parent.parent
+                    node.parent.set_color("black")
+                    node.parent.parent.set_color("red")
+                    node = node.parent.parent
                 else:
-                    if k == k.parent.right:
-                        k = k.parent
-                        self.left_rotate(k)
-                    k.parent.set_color("black")
-                    k.parent.parent.set_color("red")
-                    self.right_rotate(k.parent.parent)
-            if k == self.root:
+                    if node == node.parent.right:
+                        node = node.parent
+                        self.left_rotate(node)
+                    node.parent.set_color("black")
+                    node.parent.parent.set_color("red")
+                    self.right_rotate(node.parent.parent)
+            if node == self.root:
                 break
         self.root.set_color("black")
 
@@ -312,12 +312,12 @@ class RedBlackTree():
                 indent += "|    "
 
             s_color = "RED" if node.is_red() else "BLACK"
-            print(str(node.item) + "(" + s_color + ")")
+            print(str(node.get_key()) + "(" + s_color + ")")
             self.__print_helper(node.left, indent, False)
             self.__print_helper(node.right, indent, True)
 
-    def search(self: T, k: int) -> Node:
-        return self.search_tree_helper(self.root, k)
+    def search(self: T, key: int) -> Node:
+        return self.search_tree_helper(self.root, key)
 
     def minimum(self: T, node: Node = None) -> Node:
         if node is None:
@@ -392,8 +392,6 @@ class RedBlackTree():
 
     def insert(self: T, key: int) -> None:
         node = Node(key)
-        node.parent = None
-        node.item = key
         node.left = self.TNULL
         node.right = self.TNULL
         node.set_color("red")
@@ -403,7 +401,7 @@ class RedBlackTree():
 
         while not x.is_null():
             y = x
-            if node.item < x.item:
+            if node.get_key() < x.get_key():
                 x = x.left
             else:
                 x = x.right
@@ -411,7 +409,7 @@ class RedBlackTree():
         node.parent = y
         if y is None:
             self.root = node
-        elif node.item < y.item:
+        elif node.get_key() < y.get_key():
             y.left = node
         else:
             y.right = node
@@ -427,8 +425,8 @@ class RedBlackTree():
 
         self.fix_insert(node)
 
-    def delete(self: T, item: int) -> None:
-        self.delete_node_helper(self.root, item)
+    def delete(self: T, key: int) -> None:
+        self.delete_node_helper(self.root, key)
 
     def print_tree(self: T) -> None:
         self.__print_helper(self.root, "", True)
