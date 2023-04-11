@@ -22,9 +22,6 @@ class Node():
         self.color = 1
         self.value = None
 
-    def __eq__(self: T, other: T) -> bool:
-        return self.id == other.id
-
     def __repr__(self: T) -> str:
         return "Key: " + str(self._key) + " Value: " + str(self.value)
 
