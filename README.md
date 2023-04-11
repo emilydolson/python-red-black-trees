@@ -83,6 +83,7 @@ To know more about the contents of the tree, you can print it to stdout:
 
 ```
 bst.print_tree()  # prints an ASCII representation of the whole tree
+```
 
 #### Traversals 
 
