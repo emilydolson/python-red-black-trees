@@ -10,32 +10,26 @@ T = TypeVar('T', bound='Node')
 
 # Node creation
 class Node():
-    next_id = 0
 
     def __init__(self: T, key: int) -> None:
-        self.id = Node.next_id
-        Node.next_id += 1
         self._key = key
         self.parent = None
         self.left = None
         self.right = None
-        self.color = 1
+        self._color = 1
         self.value = None
-
-    def __eq__(self: T, other: T) -> bool:
-        return self.id == other.id
 
     def __repr__(self: T) -> str:
         return "Key: " + str(self._key) + " Value: " + str(self.value)
 
     def get_color(self: T) -> str:
-        return "black" if self.color == 0 else "red"
+        return "black" if self._color == 0 else "red"
 
     def set_color(self: T, color: str) -> None:
         if color == "black":
-            self.color = 0
+            self._color = 0
         elif color == "red":
-            self.color = 1
+            self._color = 1
         else:
             raise Exception("Unknown color")
 
@@ -43,13 +37,13 @@ class Node():
         return self._key
 
     def is_red(self: T) -> bool:
-        return self.color == 1
+        return self._color == 1
 
     def is_black(self: T) -> bool:
-        return self.color == 0
+        return self._color == 0
 
     def is_null(self: T) -> bool:
-        return self.id == -1
+        return self._key is None
 
     def depth(self: T) -> int:
         return 0 if self.parent is None else self.parent.depth() + 1
@@ -57,7 +51,7 @@ class Node():
     @classmethod
     def null(cls: Type[T]) -> T:
         node = cls(0)
-        node.id = -1
+        node._key = None
         node.set_color("black")
         return node
 
