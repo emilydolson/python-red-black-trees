@@ -81,6 +81,15 @@ class RedBlackTree():
     def __setitem__(self: T, key: int, value: int) -> None:
         self.search(key).value = value
 
+    def __str__(self: T) -> str:
+        node = self.root
+        output = ""
+        s_color = "RED" if node.is_red() else "BLACK"
+        output += str(node.key) + "(" + s_color + ")\n"
+        output += self.__print_helper(node.left, "     ", False)
+        output += self.__print_helper(node.right, "     ", True)
+        return output
+        
     # Setters and Getters #
     def get_root(self: T) -> Node:
         return self.root
@@ -296,19 +305,21 @@ class RedBlackTree():
 
     # Printing the tree
     def __print_helper(self: T, node: Node, indent: str, last: bool) -> None:
+        output = ""
         if not node.is_null():
             sys.stdout.write(indent)
             if last:
-                sys.stdout.write("R----  ")
+                output += "R----  "
                 indent += "     "
             else:
-                sys.stdout.write("L----   ")
+                output += "L----   "
                 indent += "|    "
 
             s_color = "RED" if node.is_red() else "BLACK"
-            print(str(node.get_key()) + "(" + s_color + ")")
-            self.__print_helper(node.left, indent, False)
-            self.__print_helper(node.right, indent, True)
+            output += str(node.get_key()) + "(" + s_color + ")" + '\n'
+            output += self.__print_helper(node.left, indent, False)
+            output += self.__print_helper(node.right, indent, True)
+        return output
 
     def search(self: T, key: int) -> Node:
         return self.search_tree_helper(self.root, key)
@@ -423,4 +434,4 @@ class RedBlackTree():
         self.delete_node_helper(self.root, key)
 
     def print_tree(self: T) -> None:
-        self.__print_helper(self.root, "", True)
+        print str(self)
