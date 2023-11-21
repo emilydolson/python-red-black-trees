@@ -66,3 +66,14 @@ def test_null_node() -> None:
     null = Node.null()
     assert null.is_null()
     assert null.is_black()
+
+
+def test_repr() -> None:
+    """
+    Test:
+    Key only
+    Key/Value
+    Null
+    """
+    node = Node(2)
+    assert repr(node) == "Key: 2 Value: None"

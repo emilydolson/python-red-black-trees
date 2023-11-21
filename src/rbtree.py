@@ -1,7 +1,6 @@
 # Implementing Red-Black Tree in Python
 # Adapted from https://www.programiz.com/dsa/red-black-tree
 
-import sys
 from typing import Type, TypeVar, Iterator
 
 
@@ -85,11 +84,11 @@ class RedBlackTree():
         node = self.root
         output = ""
         s_color = "RED" if node.is_red() else "BLACK"
-        output += str(node.key) + "(" + s_color + ")\n"
+        output += str(node.get_key()) + "(" + s_color + ")\n"
         output += self.__print_helper(node.left, "     ", False)
         output += self.__print_helper(node.right, "     ", True)
         return output
-        
+
     # Setters and Getters #
     def get_root(self: T) -> Node:
         return self.root
@@ -304,15 +303,15 @@ class RedBlackTree():
         self.root.set_color("black")
 
     # Printing the tree
-    def __print_helper(self: T, node: Node, indent: str, last: bool) -> None:
+    def __print_helper(self: T, node: Node, indent: str, last: bool) -> str:
         output = ""
         if not node.is_null():
-            sys.stdout.write(indent)
+            output += indent
             if last:
                 output += "R----  "
                 indent += "     "
             else:
-                output += "L----   "
+                output += "L----  "
                 indent += "|    "
 
             s_color = "RED" if node.is_red() else "BLACK"
@@ -434,4 +433,4 @@ class RedBlackTree():
         self.delete_node_helper(self.root, key)
 
     def print_tree(self: T) -> None:
-        print str(self)
+        print(str(self))
