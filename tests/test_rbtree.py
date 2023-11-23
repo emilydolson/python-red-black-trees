@@ -80,7 +80,7 @@ def test_insert() -> None:
     bst.insert(109)
     bst.insert(102)
 
-    assert bst.size == 23
+    assert len(bst) == 23
 
     check_valid(bst)
 
@@ -112,24 +112,25 @@ def test_delete() -> None:
     bst.insert(58)
     bst.insert(42)
 
-    assert bst.size == 12
+    assert len(bst) == 12
 
     bst.delete(48)
-    assert bst.size == 11
+    assert len(bst) == 11
     bst.delete(42)
-    assert bst.size == 10
+    assert len(bst) == 10
     bst.delete(42)
-    assert bst.size == 9
+    assert len(bst) == 9
+    assert len(bst) == 9
     assert bst.search(42).get_key() == 42
     bst.delete(42)
     assert bst.search(42).is_null()
-    assert bst.size == 8
+    assert len(bst) == 8
     bst.delete(100)
-    assert bst.size == 7
+    assert len(bst) == 7
 
     bst.delete(100)
 
-    assert bst.size == 7
+    assert len(bst) == 7
     check_valid(bst)
 
 
@@ -192,14 +193,13 @@ def test_accessors() -> None:
 
     bst.insert(57)
     assert bst.predecessor(bst.search(57)).get_key() == 55
-
-
+    
+    
 def test_preorder() -> None:
     bst = RedBlackTree()
     bst.insert(1)
     bst.insert(2)
     bst.insert(3)
-
     nodes = bst.preorder()
     keys = []
     for node in nodes:
@@ -255,25 +255,6 @@ def test_iterator_exception() -> None:
     bst = RedBlackTree()
     with pytest.raises(Exception):
         bst.set_iteration_style("spam")
-
-
-def test_print() -> None:
-    bst = RedBlackTree()
-    bst.insert(73)
-    print(bst.get_root())
-    bst.insert(48)
-    bst.insert(100)
-    bst.insert(42)
-    bst.insert(55)
-    bst.insert(40)
-    bst.insert(58)
-    bst.insert(42)
-    bst.insert(55)
-    bst.insert(40)
-    bst.insert(58)
-    bst.insert(42)
-
-    bst.print_tree()
 
 
 def test_elaborate_delete() -> None:
@@ -355,3 +336,38 @@ def test_duplicates() -> None:
     bst.delete(42)
     bst.delete(42)
     check_valid(bst)
+
+
+print_data = [
+    [
+        [1, 2, 3],
+        (""
+         + "2(BLACK)\n"
+         + "     L----  1(RED)\n"
+         + "     R----  3(RED)\n")
+    ],
+    [
+        [73, 48, 100, 42, 55, 40, 58, 42, 55, 40, 58, 42],
+        (""
+         + "48(BLACK)\n"
+         + "     L----  42(BLACK)\n"
+         + "     |    L----  40(BLACK)\n"
+         + "     |    |    R----  40(RED)\n"
+         + "     |    R----  42(BLACK)\n"
+         + "     |         R----  42(RED)\n"
+         + "     R----  73(BLACK)\n"
+         + "          L----  55(RED)\n"
+         + "          |    L----  55(BLACK)\n"
+         + "          |    R----  58(BLACK)\n"
+         + "          |         R----  58(RED)\n"
+         + "          R----  100(BLACK)\n")
+    ]
+]
+
+
+@pytest.mark.parametrize("input, expected", print_data)
+def test_print(input: list, expected: str) -> None:
+    bst = RedBlackTree()
+    for key in input:
+        bst.insert(key)
+    assert str(bst) == expected
