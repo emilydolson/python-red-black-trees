@@ -80,7 +80,7 @@ def test_insert() -> None:
     bst.insert(109)
     bst.insert(102)
 
-    assert bst.size == 23
+    assert len(bst) == 23
 
     check_valid(bst)
 
@@ -112,24 +112,25 @@ def test_delete() -> None:
     bst.insert(58)
     bst.insert(42)
 
-    assert bst.size == 12
+    assert len(bst) == 12
 
     bst.delete(48)
-    assert bst.size == 11
+    assert len(bst) == 11
     bst.delete(42)
-    assert bst.size == 10
+    assert len(bst) == 10
     bst.delete(42)
-    assert bst.size == 9
+    assert len(bst) == 9
+    assert len(bst) == 9
     assert bst.search(42).get_key() == 42
     bst.delete(42)
     assert bst.search(42).is_null()
-    assert bst.size == 8
+    assert len(bst) == 8
     bst.delete(100)
-    assert bst.size == 7
+    assert len(bst) == 7
 
     bst.delete(100)
 
-    assert bst.size == 7
+    assert len(bst) == 7
     check_valid(bst)
 
 
@@ -192,14 +193,13 @@ def test_accessors() -> None:
 
     bst.insert(57)
     assert bst.predecessor(bst.search(57)).get_key() == 55
-
-
+    
+    
 def test_preorder() -> None:
     bst = RedBlackTree()
     bst.insert(1)
     bst.insert(2)
     bst.insert(3)
-
     nodes = bst.preorder()
     keys = []
     for node in nodes:

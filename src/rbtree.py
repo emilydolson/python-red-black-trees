@@ -89,6 +89,9 @@ class RedBlackTree():
         output += self.__print_helper(node.right, "     ", True)
         return output
 
+    def __len__(self: T) -> int:
+        return self.size
+
     # Setters and Getters #
     def get_root(self: T) -> Node:
         return self.root
