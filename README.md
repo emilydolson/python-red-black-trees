@@ -1,4 +1,4 @@
-# Python red-black trees
+# Python red-black trees.
 
 [![Python package](https://github.com/emilydolson/python-red-black-trees/actions/workflows/python-package.yml/badge.svg)](https://github.com/emilydolson/python-red-black-trees/actions/workflows/python-package.yml) [![codecov](https://codecov.io/gh/emilydolson/python-red-black-trees/branch/main/graph/badge.svg?token=0LAOX0AEZY)](https://codecov.io/gh/emilydolson/python-red-black-trees)
 
